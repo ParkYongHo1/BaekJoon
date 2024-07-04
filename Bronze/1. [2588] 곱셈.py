@@ -16,8 +16,11 @@ sys.stdout.write(str(third) + '\n')
 sys.stdout.write(str(fourth) +'\n')
 
 # TEST
+# input
 # a = 472
 # b = 385
+
+# output
 # first = 2360
 # second = 3776
 # third = 1416

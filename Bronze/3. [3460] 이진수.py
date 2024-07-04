@@ -19,3 +19,11 @@ for _ in range(T):
     result= []
     cnt=0
             
+# TEST
+
+# input
+# 1
+# 13
+
+# output 
+# 0 2 3
