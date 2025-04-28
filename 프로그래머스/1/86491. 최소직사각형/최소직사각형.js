@@ -1,13 +1,13 @@
 function solution(sizes) {
-    const width = [];
-    const height = [];
-
-    for(let i = 0; i < sizes.length; i++) {
-        const max = Math.max(sizes[i][0], sizes[i][1]);
-        const min = Math.min(sizes[i][0], sizes[i][1]);
-        width.push(max);
-        height.push(min);
+    let maxWidth = 0;
+    let maxHeight = 0;
+    for (let i = 0; i < sizes.length; i++) {
+        if (sizes[i][0] < sizes[i][1]) {
+            [sizes[i][0], sizes[i][1]] = [sizes[i][1], sizes[i][0]];
+        }
+        if(sizes[i][0] > maxWidth) maxWidth = sizes[i][0]
+        if(sizes[i][1] > maxHeight) maxHeight = sizes[i][1]
     }
-
-    return Math.max(...width) * Math.max(...height);
+    return maxWidth * maxHeight
 }
+
