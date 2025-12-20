@@ -1,14 +1,11 @@
 function solution(clothes) {
-    let hashMap = new Map();
+    let map = new Map();
     let answer = 1;
-    
-    clothes.forEach((item)=>{
-        hashMap.set(item[1], (hashMap.get(item[1]) || 0 ) + 1);    
-    })
-    
-    for(let item of hashMap.values()){
-        answer *= (item + 1)
+    clothes.forEach(e=> map.set(e[1], (map.get(e[1]) || 1) + 1));
+
+    for(let [key,value] of map){
+        answer *= value
     }
     
-    return answer - 1;
+    return answer - 1
 }
