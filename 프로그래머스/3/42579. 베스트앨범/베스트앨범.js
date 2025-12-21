@@ -1,28 +1,20 @@
 function solution(genres, plays) {
-  const result = [];
-  const obj = {}; 
-  const info = {}; 
+    let result = [];
+    let total = {};
+    let info = {};
+    genres.map((genre,index)=>{
+        total[genre] = (total[genre] || 0) + plays[index];
+        if(!info[genre]) info[genre] = [];
+        info[genre].push({index:index, plays:plays[index]})
+    })
+    const sortedGenre = Object.keys(total).sort((a,b) => total[b]- total[a])
+    sortedGenre.map((genre,index)=>{
+        const song = info[genre].sort((a,b)=> {
+            if(b.plays === a.plays) return a.index - b.index
+            return b.plays - a.plays   
+        }).slice(0,2)
+        result.push(...song.map(ele=>ele.index))
+    })
 
-  for (let i = 0; i < genres.length; i++) {
-    obj[genres[i]] = (obj[genres[i]] || 0) + plays[i];
-    info[i] = { play: plays[i], genre: genres[i] };
-  } 
-
-
-  const sortedGenre = Object.keys(obj).sort((a, b) => obj[b] - obj[a]);
-
-  sortedGenre.forEach((genre) => {
-
-    const genreSong = Object.values(info)
-      .filter((song) => song.genre === genre)
-      .sort((a, b) => b.play - a.play)
-      .slice(0, 2);
-
-    genreSong.forEach((gs) => {
-      const uniqueId = Object.values(info).indexOf(gs);
-      result.push(uniqueId);
-    });
-  });
-
-  return result;
+    return result;
 }
