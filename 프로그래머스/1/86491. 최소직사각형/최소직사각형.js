@@ -1,13 +1,17 @@
 function solution(sizes) {
-    let maxWidth = 0;
-    let maxHeight = 0;
-    for (let i = 0; i < sizes.length; i++) {
-        if (sizes[i][0] < sizes[i][1]) {
-            [sizes[i][0], sizes[i][1]] = [sizes[i][1], sizes[i][0]];
-        }
-        if(sizes[i][0] > maxWidth) maxWidth = sizes[i][0]
-        if(sizes[i][1] > maxHeight) maxHeight = sizes[i][1]
+    let maxW=0;
+    let maxH=0;
+    for(let size of sizes){
+        size.sort((a,b)=> a-b)
     }
-    return maxWidth * maxHeight
+    for(let [w,h] of sizes){
+        if(w > maxW){
+            maxW= w;    
+        }
+        if(h > maxH){
+            maxH = h    
+        }
+    }
+    return maxW * maxH
 }
 
