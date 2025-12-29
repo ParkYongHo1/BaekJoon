@@ -1,39 +1,37 @@
-function isPrime(num) {
-    if (num < 2) return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) return false;
+
+const isPrime = (num) =>{
+    if(num < 2) return false;
+    for(let i = 2; i * i <= num; i++){
+        if(num % i === 0) return false
     }
-    return true;
+    return true
 }
-
-function getAllPermutations(arr) {
-    const result = [];
-
-    const permute = (current, remaining) => {
-        if (current.length > 0) {
+function solution(numbers){
+    const arr = numbers.split("");
+    const set = new Set();
+    
+    const dfs = (path,used) => {
+        
+        if(path.length > 0){
+            set.add(Number(path.join("")))
+        }
+        
+        for(let i = 0; i < numbers.length; i++){
+            if(used[i]) continue;
             
-            result.push(parseInt(current));
+            used[i] = true;
+            path.push(arr[i]);
+            
+            dfs(path,used);
+            
+            path.pop();
+            used[i] = false;
         }
-        for (let i = 0; i < remaining.length; i++) {
-            permute(current + remaining[i], remaining.slice(0, i).concat(remaining.slice(i + 1)));
-        }
-    };
-
-    permute('', arr);
-    return result;
+    }
+    dfs([],Array(numbers.length).fill(false));
+    let count = 0;
+    for(let num of set){
+        if(isPrime(num)) count++;
+    }
+    return count
 }
-
-function solution(numbers) {
-    const digits = numbers.split('');
-    const uniquePrimes = new Set();
-
-    const permutations = getAllPermutations(digits);
-    permutations.forEach(num => {
-        if (isPrime(num)) {
-            uniquePrimes.add(num);
-        }
-    });
-
-    return uniquePrimes.size;
-}
-
